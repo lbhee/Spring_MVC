@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<context:annotation-config />
+<context:component-scan base-package="ncontroller"/> <!-- ncontroller자동으로 스캔해서 bean객체 생성 -->
+<!-- 모든 컨트롤러가 공통사용 DAO 빈객체 참조 -->	
+<bean class="dao.NoticeDao"></bean>
+
+<!-- 게시판 (빈생성이 자동화된다. component-scan에 의해서)-->
+<!--  <bean class="ncontroller.CustomerController"></bean>-->
+
+<!-- 파일업로드 보조(반드시필요!) -->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="10485760"></property> <!-- 파일최대 약 10메가 -->
+	<property name="defaultEncoding" value="UTF-8"></property> <!-- 한글처리 -->
+</bean>
+	
+</beans> 
+
+
